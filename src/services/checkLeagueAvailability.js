@@ -1,3 +1,5 @@
+// Так как в бесплатной версии API не все лиги доступны
+
 export default function checkLeagueAvailability(code) {
     switch (code) {
         case "BSA":

@@ -13,9 +13,6 @@ const Header = () => {
                 <li>
                     <Link to='/league-list/'>League list</Link>
                 </li>
-                <li>
-                    <Link to='/league-calendar/'>League calendar</Link>   
-                </li>
             </ul>
         </div>
     );

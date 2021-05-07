@@ -5,8 +5,7 @@ import checkLeagueAvailability from '../services/checkLeagueAvailability';
 
 export default class LeagueList extends React.Component {
     state = {
-        competitionsList: null,
-        page: 1
+        competitionsList: null
     }
 
     gotService = new gotService();
@@ -17,21 +16,18 @@ export default class LeagueList extends React.Component {
                 this.setState({competitionsList});
                 console.log(this.state);
             })
-        this.gotService.getAllMatches('PL')
-            .then((allmatches) => {
-                console.log('all');
-                console.log(allmatches);
-            })
     }
 
     renderItems(arr) {
+        const {url} = this.props.match;
+
         return arr.map((item) => {
             const {id, name, code} = item;
 
             if (checkLeagueAvailability(code)) {
                 return (
                     <li key={id}>
-                        <Link to={`/league-list/${code}/`}>{name}</Link>
+                        <Link to={`${url}${code}/`}>{name}</Link>
                     </li>
                 )
             } else {

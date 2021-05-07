@@ -1,5 +1,6 @@
 import React from 'react';
 import gotService from '../services/gotService';
+import {Link} from 'react-router-dom';
 
 export default class CommandsList extends React.Component {
 
@@ -22,7 +23,7 @@ export default class CommandsList extends React.Component {
     renderTeams(arr) {
         return arr.map(({name, id}) => {
             return (
-                <li key={id}>{name}</li>
+                <li key={id}><Link to={`${id}/`}>{name}</Link></li>
             )
         })
     }

@@ -14,15 +14,21 @@ export default class GotService {
         );
             
         if (!res.ok) {
+            const errorRes = await res.json();
           throw new Error(`Could not fetch ${url}` +
-            `, received ${res.status}`);
+            `,${res.status}. ${errorRes.message}`);
         }
         return await res.json();
     }
+
+    getTestResource = async (url) => {
+        const res = await this.getResource(url);
+        return res;
+    }
     
     // Получить все матчи за промежуток времени
-    // Возвращает ошибку со статусом 400, если брать промежуток больше 10 дней
     // Например /matches?competitions=PL&dateFrom=2021-04-25&dateTo=2021-05-05
+    // Нельзя взять промежуток времени больше 10 дней, вернет ошибку со статусом 400
     getAllMatches = async (id) => {
         const res = await this.getResource(`/matches?competitions=${id}&dateFrom=2021-04-25&dateTo=2021-05-05`);
         return res;
@@ -50,19 +56,17 @@ export default class GotService {
     }
 
     // Получить команду по id
-    // Работает
+    // Работает /teams/5529/
     getTeam = async (id) => {
         const res = await this.getResource(`/teams/${id}/`);
         return res;
     }
 
+    // Получить матчи команды по id
+    // Работает, пример /teams/5529/matches/
     getTeamMatches = async (id) => {
         const res = await this.getResource(`/teams/${id}/matches/`);
         return res;
     }
-
-    
-
-    
 
 }
